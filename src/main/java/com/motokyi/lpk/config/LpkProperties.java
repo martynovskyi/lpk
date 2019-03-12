@@ -23,6 +23,7 @@ public class LpkProperties {
     private static final Path DEFAULT_LPK_HOME = Path.of(System.getProperty("user.home"), ".lpk");
     private static final String CONFIG_SUBDIR = "config";
     private static final String STORAGE_SUBDIR = "storage";
+    private static final String META_FILE = STORAGE_SUBDIR + ".meta";
     private static Path homePath;
     private static Path storagePath;
     private static Path configPath;
@@ -47,6 +48,21 @@ public class LpkProperties {
             initConfig();
         }
         return configPath;
+    }
+
+    public Path getStorageMeta() {
+        return getStorage().resolve(META_FILE);
+    }
+
+    @PostConstruct
+    public void init() {
+        initHome();
+        log.info("HOME: " + homePath);
+        initConfig();
+        log.info("CONFIG: " + configPath);
+        initStorage();
+        log.info("STORAGE: " + storagePath);
+
     }
 
     private void initHome() {
@@ -111,17 +127,6 @@ public class LpkProperties {
                 throw new RuntimeException(message, e);
             }
         }
-
-    }
-
-    @PostConstruct
-    public void init() {
-        initHome();
-        log.info("HOME: " + homePath);
-        initConfig();
-        log.info("CONFIG: " + configPath);
-        initStorage();
-        log.info("STORAGE: " + storagePath);
 
     }
 }

@@ -1,4 +1,4 @@
-package com.motokyi.lpk.model;
+package com.motokyi.lpk.model.meta;
 
 import lombok.Data;
 
@@ -6,9 +6,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-public class CredentialStorageMeta {
+public class MetaDataItem {
     private UUID credsId;
     private UUID credsVersion;
     private LocalDateTime created;
-    private LocalDateTime updated;
 }

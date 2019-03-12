@@ -23,6 +23,4 @@ class TitlePanel extends JPanel {
         }
         return null;
     }
-
-
 }
