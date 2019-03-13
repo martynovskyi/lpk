@@ -18,8 +18,13 @@ import java.util.UUID;
 @Configuration
 @RequiredArgsConstructor
 public class CredStorageConfig {
-
     private final CredentialsStoragePersistence storage;
+
+    @Bean
+    public StorageMeta storageMeta() {
+        final Optional<StorageMeta> storageMeta = storage.loadMeta();
+        return storageMeta.orElseGet(CredStorageConfig::initNewStorage);
+    }
 
     private static StorageMeta initNewStorage() {
         log.warn("Creating new storage");
@@ -30,11 +35,5 @@ public class CredStorageConfig {
                 .items(new HashSet<>())
                 .actions(new ArrayList<>())
                 .build();
-    }
-
-    @Bean
-    public StorageMeta storageMeta() {
-        final Optional<StorageMeta> storageMeta = storage.load();
-        return storageMeta.orElseGet(CredStorageConfig::initNewStorage);
     }
 }

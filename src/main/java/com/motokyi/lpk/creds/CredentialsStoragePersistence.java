@@ -5,7 +5,7 @@ import com.motokyi.lpk.model.meta.StorageMeta;
 import java.util.Optional;
 
 public interface CredentialsStoragePersistence {
-    Optional<StorageMeta> load();
+    Optional<StorageMeta> loadMeta();
 
     void save(final StorageMeta meta);
 }

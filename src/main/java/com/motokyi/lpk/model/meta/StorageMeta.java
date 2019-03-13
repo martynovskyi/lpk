@@ -27,7 +27,7 @@ public class StorageMeta {
     private LocalDateTime closed;
     @JsonIgnore
     private StorageAction currentAction;
-    private Set<MetaDataItem> items = new HashSet<>();
+    private Set<StorageSnapshotMeta> items = new HashSet<>();
     private List<StorageAction> actions = new ArrayList<>();
 
     @JsonCreator
@@ -35,7 +35,7 @@ public class StorageMeta {
                                       @JsonProperty("version") StorageVersion version,
                                       @JsonProperty("created") LocalDateTime created,
                                       @JsonProperty("updated") LocalDateTime updated,
-                                      @JsonProperty("items") Set<MetaDataItem> items,
+                                      @JsonProperty("items") Set<StorageSnapshotMeta> items,
                                       @JsonProperty("actions") List<StorageAction> actions) {
 
         final var storage = StorageMeta.builder()

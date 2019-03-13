@@ -21,7 +21,7 @@ public class JsonCredStorage implements CredentialsStoragePersistence {
     private final LpkProperties props;
 
     @Override
-    public Optional<StorageMeta> load() {
+    public Optional<StorageMeta> loadMeta() {
         if (Files.exists(props.getStorageMeta())) {
             try {
                 final StorageMeta meta = mapper.readerFor(StorageMeta.class)
