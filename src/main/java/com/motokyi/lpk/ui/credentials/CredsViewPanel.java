@@ -1,17 +1,22 @@
-package com.motokyi.lpk.ui;
+package com.motokyi.lpk.ui.credentials;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CredsContentPanel extends JPanel {
+public class CredsViewPanel extends JPanel {
+    public static final Dimension PREFERRED_SIZE = new Dimension(250, 25);
+    private final CredsContentPanel rootPanel;
 
-    CredsContentPanel() {
+    public CredsViewPanel(CredsContentPanel rootPanel) {
         super();
+        this.rootPanel = rootPanel;
+
         super.setBorder(BorderFactory.createDashedBorder(Color.black));
         super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         final JLabel siteLabel = new JLabel("Web page");
         final JTextField siteTextField = new JTextField();
+        siteTextField.setPreferredSize(PREFERRED_SIZE);
 
         final JPanel sitePanel = new JPanel();
         sitePanel.setLayout(new BoxLayout(sitePanel, BoxLayout.LINE_AXIS));
@@ -34,20 +39,5 @@ public class CredsContentPanel extends JPanel {
         passwordPanel.add(passwordLabel);
         passwordPanel.add(passwordTextField);
         super.add(passwordPanel);
-
-        this.setVisible(false);
-
-    }
-
-    void setExpanded(boolean expanded) {
-        this.setVisible(expanded);
-        this.repaint();
-    }
-
-    public CredentialsItemPanel getMainPanel() {
-        if (super.getParent().getClass().equals(CredentialsItemPanel.class)) {
-            return (CredentialsItemPanel) this.getParent();
-        }
-        return null;
     }
 }

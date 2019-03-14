@@ -10,7 +10,7 @@ class ChevronButton extends JButton {
         super(more);
         super.setOpaque(false);
         super.setContentAreaFilled(false);
-        super.setBorderPainted(false);
+        super.setBorderPainted(true);
 
         super.addActionListener(e -> {
             if (this.getParent().getClass().equals(TitlePanel.class)) {

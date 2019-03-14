@@ -1,13 +1,14 @@
 package com.motokyi.lpk.ui;
 
 import com.motokyi.lpk.model.CredentialsEntry;
+import com.motokyi.lpk.ui.credentials.CredsContentPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static java.util.Objects.nonNull;
 
-class CredentialsItemPanel extends JPanel {
+public class CredentialsItemPanel extends JPanel {
     private final TitlePanel titlePanel;
     private final CredsContentPanel contentPanel;
     private final CredentialsEntry model;
