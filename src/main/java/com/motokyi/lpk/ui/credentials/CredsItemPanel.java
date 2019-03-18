@@ -1,26 +1,26 @@
-package com.motokyi.lpk.ui;
+package com.motokyi.lpk.ui.credentials;
 
 import com.motokyi.lpk.model.CredentialsEntry;
-import com.motokyi.lpk.ui.credentials.CredsContentPanel;
+import com.motokyi.lpk.ui.TitlePanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 import static java.util.Objects.nonNull;
 
-public class CredentialsItemPanel extends JPanel {
+public class CredsItemPanel extends JPanel {
     private final TitlePanel titlePanel;
     private final CredsContentPanel contentPanel;
     private final CredentialsEntry model;
 
 
-    CredentialsItemPanel(CredentialsEntry creds) {
+    public CredsItemPanel(CredentialsEntry creds) {
         super();
         super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         super.setAlignmentY(Component.TOP_ALIGNMENT);
         this.model = creds;
         this.titlePanel = new TitlePanel(model.getName());
-        this.contentPanel = new CredsContentPanel();
+        this.contentPanel = new CredsContentPanel(model);
         super.add(titlePanel);
         super.add(contentPanel);
     }
@@ -43,7 +43,7 @@ public class CredentialsItemPanel extends JPanel {
         return titlePanel;
     }
 
-    CredsContentPanel getContentPanel() {
+    public CredsContentPanel getContentPanel() {
         return contentPanel;
     }
 

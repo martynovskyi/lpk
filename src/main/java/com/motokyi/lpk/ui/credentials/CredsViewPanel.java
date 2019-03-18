@@ -1,43 +1,45 @@
 package com.motokyi.lpk.ui.credentials;
 
+import com.motokyi.lpk.model.CredentialsEntry;
+import com.motokyi.lpk.ui.utils.JLabelFactory;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class CredsViewPanel extends JPanel {
-    public static final Dimension PREFERRED_SIZE = new Dimension(250, 25);
-    private final CredsContentPanel rootPanel;
+import static com.motokyi.lpk.ui.utils.UIUtils.Components.*;
 
-    public CredsViewPanel(CredsContentPanel rootPanel) {
+class CredsViewPanel extends JPanel {
+    private static final Dimension PREFERRED_SIZE = new Dimension(250, 25);
+    private final CredsContentPanel rootPanel;
+    private final CredentialsEntry model;
+
+    CredsViewPanel(CredsContentPanel rootPanel, CredentialsEntry model) {
         super();
         this.rootPanel = rootPanel;
+        this.model = model;
 
-        super.setBorder(BorderFactory.createDashedBorder(Color.black));
-        super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        super.setBorder(BorderFactory.createDashedBorder(Color.black, 3, 3));
+        super.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
-        final JLabel siteLabel = new JLabel("Web page");
-        final JTextField siteTextField = new JTextField();
+        final JTextField siteTextField = disabledTextField(model.getURL());
         siteTextField.setPreferredSize(PREFERRED_SIZE);
 
-        final JPanel sitePanel = new JPanel();
-        sitePanel.setLayout(new BoxLayout(sitePanel, BoxLayout.LINE_AXIS));
-        sitePanel.add(siteLabel);
-        sitePanel.add(siteTextField);
-        super.add(sitePanel);
+        final JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
+        leftPanel.add(wrapBox(new JLabel("Web page"), siteTextField, copyButton()));
+        leftPanel.add(wrapBox(new JLabel("Username"), disabledTextField(model.getUsername()), copyButton()));
+        leftPanel.add(wrapBox(new JLabel("Password"), disabledTextField(model.getPassword()), copyButton()));
+        leftPanel.add(wrapBox(new JLabel("Comment"), disabledTextField(model.getComment())));
+        super.add(leftPanel);
+        final JPanel spacer = new JPanel();
+        spacer.setBorder(BorderFactory.createLineBorder(Color.black));
+        super.add(spacer);
 
-        final JLabel usernameLabel = new JLabel("Username");
-        final JTextField usernameTextField = new JTextField();
-        final JPanel userNamePanel = new JPanel();
-        userNamePanel.setLayout(new BoxLayout(userNamePanel, BoxLayout.LINE_AXIS));
-        userNamePanel.add(usernameLabel);
-        userNamePanel.add(usernameTextField);
-        super.add(userNamePanel);
-
-        final JLabel passwordLabel = new JLabel("Password");
-        final JTextField passwordTextField = new JTextField();
-        final JPanel passwordPanel = new JPanel();
-        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.LINE_AXIS));
-        passwordPanel.add(passwordLabel);
-        passwordPanel.add(passwordTextField);
-        super.add(passwordPanel);
+        final JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
+        rightPanel.add(wrapBox(new JLabel("Created"), JLabelFactory.of(model.getCreated())));
+        rightPanel.add(wrapBox(new JLabel("Updated"), JLabelFactory.of(model.getUpdated())));
+        super.add(rightPanel);
     }
+
 }

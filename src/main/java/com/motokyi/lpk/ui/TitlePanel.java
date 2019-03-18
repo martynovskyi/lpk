@@ -1,11 +1,13 @@
 package com.motokyi.lpk.ui;
 
+import com.motokyi.lpk.ui.credentials.CredsItemPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
-class TitlePanel extends JPanel {
+public class TitlePanel extends JPanel {
 
-    TitlePanel(String name) {
+    public TitlePanel(String name) {
         super();
         super.setBorder(BorderFactory.createLineBorder(Color.black));
         final FlowLayout headerLayout = new FlowLayout();
@@ -17,9 +19,9 @@ class TitlePanel extends JPanel {
         super.add(label);
     }
 
-    CredentialsItemPanel getMainPanel() {
-        if (super.getParent().getClass().equals(CredentialsItemPanel.class)) {
-            return (CredentialsItemPanel) this.getParent();
+    CredsItemPanel getMainPanel() {
+        if (super.getParent().getClass().equals(CredsItemPanel.class)) {
+            return (CredsItemPanel) this.getParent();
         }
         return null;
     }

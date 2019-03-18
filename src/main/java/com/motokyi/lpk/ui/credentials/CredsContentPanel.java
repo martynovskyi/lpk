@@ -1,18 +1,20 @@
 package com.motokyi.lpk.ui.credentials;
 
 
+import com.motokyi.lpk.model.CredentialsEntry;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class CredsContentPanel extends JPanel {
 
-    public CredsContentPanel() {
+    CredsContentPanel(CredentialsEntry model) {
         super();
         super.setBorder(BorderFactory.createDashedBorder(Color.black));
-        super.setLayout(new BorderLayout());
+        super.setLayout(new BorderLayout(10, 10));
 
         super.add(new CredsControlsPanel(this), BorderLayout.NORTH);
-        super.add(new CredsViewPanel(this), BorderLayout.WEST);
+        super.add(new CredsViewPanel(this, model), BorderLayout.CENTER);
 
         this.setVisible(false);
 

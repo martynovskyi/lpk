@@ -1,15 +1,24 @@
 package com.motokyi.lpk.ui.credentials;
 
+import com.motokyi.lpk.ui.utils.Icons;
+
 import javax.swing.*;
 
-public class CredsControlsPanel extends JPanel {
+class CredsControlsPanel extends JPanel {
     private final CredsContentPanel rootPanel;
 
-    public CredsControlsPanel(CredsContentPanel rootPanel) {
+    CredsControlsPanel(CredsContentPanel rootPanel) {
         super();
         this.rootPanel = rootPanel;
         super.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-        super.add(new JButton("Edit"));
-        super.add(new JButton("Delete"));
+        super.add(Box.createHorizontalGlue());
+        final JButton editButton = new JButton(Icons.EDIT);
+        editButton.setToolTipText("Edit credentials");
+        super.add(editButton);
+        super.add(Box.createHorizontalBox());
+        final JButton deleteButton = new JButton(Icons.DELETE);
+        deleteButton.setToolTipText("Delete credentials");
+        super.add(deleteButton);
+
     }
 }

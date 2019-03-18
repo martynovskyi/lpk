@@ -1,9 +1,11 @@
 package com.motokyi.lpk.ui;
 
 import com.motokyi.lpk.model.CredentialsEntry;
+import com.motokyi.lpk.ui.credentials.CredsItemPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 public class MainWindow {
@@ -27,21 +29,25 @@ public class MainWindow {
         final Random random = new Random();
         final int alpha = 40;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 15; i++) {
             final Color color = new Color(
                     random.nextInt(256),
                     random.nextInt(256),
                     random.nextInt(256),
                     alpha);
 
-            final CredentialsEntry credentialsEntry = new CredentialsEntry();
-            credentialsEntry.setName(i + " " + color.toString());
+            final CredentialsEntry credsEntry = new CredentialsEntry();
+            credsEntry.setName(i + " " + color.toString());
+            credsEntry.setURL("https://wayne.com/");
+            credsEntry.setUsername("batman_777");
+            credsEntry.setPassword("bruce_hero");
+            credsEntry.setComment("Superman not a hero!");
+            credsEntry.setCreated(LocalDateTime.now());
 
-            final CredentialsItemPanel trayItem = new CredentialsItemPanel(credentialsEntry);
+            final CredsItemPanel trayItem = new CredsItemPanel(credsEntry);
 
             trayItem.setBackground(color);
             panel.add(trayItem);
-
         }
 
         panel.revalidate();

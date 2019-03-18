@@ -1,26 +1,30 @@
 package com.motokyi.lpk.ui;
 
 import javax.swing.*;
+import java.awt.*;
+
+import static com.motokyi.lpk.ui.utils.Icons.LESS_CHEVRON;
+import static com.motokyi.lpk.ui.utils.Icons.MORE_CHEVRON;
 
 class ChevronButton extends JButton {
-    private static ImageIcon more = new ImageIcon(ChevronButton.class.getResource("/2x/chevron_more_black.png"));
-    private static ImageIcon less = new ImageIcon(ChevronButton.class.getResource("/2x/chevron_less_black.png"));
-
     ChevronButton() {
-        super(more);
+
+        super(MORE_CHEVRON);
+        super.setMargin(new Insets(0, 0, 0, 0));
         super.setOpaque(false);
         super.setContentAreaFilled(false);
-        super.setBorderPainted(true);
+        super.setMaximumSize(new Dimension(40, 40));
+//        super.setBorderPainted(false);
 
         super.addActionListener(e -> {
             if (this.getParent().getClass().equals(TitlePanel.class)) {
                 TitlePanel titlePanel = (TitlePanel) this.getParent();
                 if (titlePanel.getMainPanel().getContentPanel().isVisible()) {
-                    super.setIcon(more);
+                    super.setIcon(MORE_CHEVRON);
                     super.repaint();
                     titlePanel.getMainPanel().getContentPanel().setExpanded(false);
                 } else {
-                    super.setIcon(less);
+                    super.setIcon(LESS_CHEVRON);
                     super.repaint();
                     titlePanel.getMainPanel().getContentPanel().setExpanded(true);
                 }
