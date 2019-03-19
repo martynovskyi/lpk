@@ -11,7 +11,7 @@ public class CredsContentPanel extends JPanel {
     CredsContentPanel(CredentialsEntry model) {
         super();
         super.setBorder(BorderFactory.createDashedBorder(Color.black));
-        super.setLayout(new BorderLayout(10, 10));
+        super.setLayout(new BorderLayout());
 
         super.add(new CredsControlsPanel(this), BorderLayout.NORTH);
         super.add(new CredsViewPanel(this, model), BorderLayout.CENTER);
