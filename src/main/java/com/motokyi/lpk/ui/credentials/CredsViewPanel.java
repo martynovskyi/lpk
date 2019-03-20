@@ -9,8 +9,8 @@ import com.motokyi.lpk.ui.utils.JLabelFactory;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.motokyi.lpk.ui.utils.UIUtils.Components.copyButton;
-import static com.motokyi.lpk.ui.utils.UIUtils.Components.disabledTextField;
+import static com.motokyi.lpk.ui.utils.JButtonFactory.copyButton;
+import static com.motokyi.lpk.ui.utils.UIUtils.disabledTextField;
 
 class CredsViewPanel extends JPanel {
     private static final Dimension PREFERRED_SIZE = new Dimension(350, 25);

@@ -7,7 +7,6 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GBCFactoryTest {
-
     private static final int X = 1;
     private static final int Y = 2;
     private static final Insets INSETS = new Insets(1, 2, 3, 4);
