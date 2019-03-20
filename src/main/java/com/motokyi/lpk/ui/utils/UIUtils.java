@@ -8,13 +8,6 @@ public class UIUtils {
     private UIUtils() {
     }
 
-    public static JTextField disabledTextField(String text) {
-        final JTextField textField = new JTextField();
-        textField.setText(text);
-        textField.setEditable(false);
-        return textField;
-    }
-
     static ImageIcon scaleImageIcon(Image src, int w, int h) {
         return new ImageIcon(scaleImage(src, w, h));
     }

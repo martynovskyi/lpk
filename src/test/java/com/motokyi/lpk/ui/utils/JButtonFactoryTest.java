@@ -11,7 +11,7 @@ class JButtonFactoryTest {
 
     @Test
     void copyButton() {
-        final JButton result = JButtonFactory.copyButton();
+        final JButton result = JButtonFactory.copyToClipboardButton(new JTextField());
 
         assertAll(() -> {
             assertNotNull(result);

@@ -9,8 +9,8 @@ import com.motokyi.lpk.ui.utils.JLabelFactory;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.motokyi.lpk.ui.utils.JButtonFactory.copyButton;
-import static com.motokyi.lpk.ui.utils.UIUtils.disabledTextField;
+import static com.motokyi.lpk.ui.utils.JButtonFactory.copyToClipboardButton;
+import static com.motokyi.lpk.ui.utils.JTextFieldFactory.disabledTextField;
 
 class CredsViewPanel extends JPanel {
     private static final Dimension PREFERRED_SIZE = new Dimension(350, 25);
@@ -27,23 +27,30 @@ class CredsViewPanel extends JPanel {
         super.setBorder(BorderFactory.createDashedBorder(Color.black, 3, 3));
         super.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        final JTextField siteTextField = disabledTextField(model.getURL());
-        siteTextField.setPreferredSize(PREFERRED_SIZE);
 
         final GridBadBuilder gbBuilder = new GridBadBuilder(new CredsViewPanelRowRules());
 
-        gbBuilder.addRow(new JLabel("Web page"),
+        final JLabel webPageLabel = new JLabel("Web page");
+        final JTextField siteTextField = disabledTextField(webPageLabel.getText(), model.getURL());
+        siteTextField.setPreferredSize(PREFERRED_SIZE);
+        gbBuilder.addRow(webPageLabel,
                 siteTextField,
-                copyButton(),
+                copyToClipboardButton(siteTextField),
                 new JLabel("Created"),
                 JLabelFactory.of(model.getCreated()));
 
-        gbBuilder.addRow(new JLabel("Username"),
-                disabledTextField(model.getUsername()),
-                copyButton(),
+        final JLabel usernameLabel = new JLabel("Username");
+        final JTextField userNameTF = disabledTextField(usernameLabel.getText(), model.getUsername());
+        gbBuilder.addRow(usernameLabel,
+                userNameTF,
+                copyToClipboardButton(userNameTF),
                 new JLabel("Updated"),
                 JLabelFactory.of(model.getUpdated()));
-        gbBuilder.addRow(new JLabel("Password"), disabledTextField(model.getPassword()), copyButton());
+
+        final JLabel passwordLabel = new JLabel("Password");
+        final JTextField passwordTF = disabledTextField(passwordLabel.getText(), model.getPassword());
+
+        gbBuilder.addRow(passwordLabel, passwordTF, copyToClipboardButton(passwordTF));
         gbBuilder.addRow(new JLabel("Comment"), disabledTextField(model.getComment()));
         super.add(gbBuilder.build());
     }
