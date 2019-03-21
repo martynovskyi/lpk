@@ -20,9 +20,7 @@ public class TrayPanel extends JPanel {
         topControls.add(search);
 
         topControls.add(Box.createVerticalBox());
-
-        final JButton newItem = new JButton(" + ");
-        topControls.add(newItem);
+        topControls.add(new AddCredsButton());
 
         final JPanel contentTopAlignmentPanel = new JPanel(new BorderLayout());
 

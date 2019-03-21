@@ -5,6 +5,7 @@ import java.awt.*;
 
 import static com.motokyi.lpk.ui.utils.Icons.LESS_CHEVRON;
 import static com.motokyi.lpk.ui.utils.Icons.MORE_CHEVRON;
+import static com.motokyi.lpk.ui.utils.UIUtils.HAND_CURSOR;
 
 class ChevronButton extends JButton {
     ChevronButton() {
@@ -13,7 +14,7 @@ class ChevronButton extends JButton {
         super.setMargin(new Insets(0, 0, 0, 0));
         super.setOpaque(false);
         super.setContentAreaFilled(false);
-        super.setMaximumSize(new Dimension(40, 40));
+        super.setCursor(HAND_CURSOR);
 //        super.setBorderPainted(false);
 
         super.addActionListener(e -> {
@@ -21,14 +22,13 @@ class ChevronButton extends JButton {
                 TitlePanel titlePanel = (TitlePanel) this.getParent();
                 if (titlePanel.getMainPanel().getContentPanel().isVisible()) {
                     super.setIcon(MORE_CHEVRON);
-                    super.repaint();
                     titlePanel.getMainPanel().getContentPanel().setExpanded(false);
                 } else {
                     super.setIcon(LESS_CHEVRON);
-                    super.repaint();
                     titlePanel.getMainPanel().getContentPanel().setExpanded(true);
                 }
 
+                    super.repaint();
             }
         });
 
