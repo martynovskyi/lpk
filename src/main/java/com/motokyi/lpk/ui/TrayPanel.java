@@ -1,5 +1,7 @@
 package com.motokyi.lpk.ui;
 
+import com.motokyi.lpk.ui.credentials.AddCredsButton;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,9 +18,7 @@ public class TrayPanel extends JPanel {
         topControls.setLayout(new BoxLayout(topControls, BoxLayout.LINE_AXIS));
         topControls.setBackground(TOP_CONTROLS_BACKGROUND);
 
-        final JTextField search = new JTextField();
-        topControls.add(search);
-
+        topControls.add(new JTextField());
         topControls.add(Box.createVerticalBox());
         topControls.add(new AddCredsButton());
 

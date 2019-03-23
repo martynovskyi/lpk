@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -32,11 +33,20 @@ public class UIUtils {
         return Optional.empty();
     }
 
-    static ImageIcon scaleImageIcon(Image src, int w, int h) {
-        return new ImageIcon(scaleImage(src, w, h));
+    public static void walk(JComponent component, Consumer<? super JComponent> consumer) {
+        if (nonNull(component)) {
+            consumer.accept(component);
+            for (Component c : component.getComponents()) {
+                walk((JComponent) c, consumer);
+            }
+        }
     }
 
-    private static Image scaleImage(Image src, int w, int h) {
+    public static ImageIcon scaleImageIcon(ImageIcon src, int w, int h) {
+        return new ImageIcon(scaleImage(src.getImage(), w, h));
+    }
+
+    public static Image scaleImage(Image src, int w, int h) {
         BufferedImage resized = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resized.createGraphics();
 
