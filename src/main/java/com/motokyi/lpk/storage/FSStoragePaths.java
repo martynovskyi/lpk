@@ -1,4 +1,4 @@
-package com.motokyi.lpk.creds;
+package com.motokyi.lpk.storage;
 
 import com.motokyi.lpk.config.LpkProperties;
 import com.motokyi.lpk.model.meta.StorageMeta;
@@ -29,9 +29,9 @@ public class FSStoragePaths implements StoragePaths {
 
     @Override
     public Path getStorage(@NonNull StorageSnapshotMeta storageItem) {
-        final Path stotagePath = storageRoot().resolve(storageItem.getId().toString());
-        createDirectory(stotagePath);
-        return stotagePath;
+        final Path storagePath = storageRoot().resolve(storageItem.getId().toString());
+        createDirectory(storagePath);
+        return storagePath;
     }
 
     private void createDirectory(Path storageRoot) {

@@ -1,8 +1,8 @@
 package com.motokyi.lpk.config;
 
-import com.motokyi.lpk.creds.CredentialsStoragePersistence;
-import com.motokyi.lpk.creds.StorageVersion;
 import com.motokyi.lpk.model.meta.StorageMeta;
+import com.motokyi.lpk.storage.StoragePersistence;
+import com.motokyi.lpk.storage.StorageVersion;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +18,11 @@ import java.util.UUID;
 @Configuration
 @RequiredArgsConstructor
 public class CredStorageConfig {
-    private final CredentialsStoragePersistence storage;
+    private final StoragePersistence<StorageMeta> storage;
 
     @Bean
     public StorageMeta storageMeta() {
-        final Optional<StorageMeta> storageMeta = storage.loadMeta();
+        final Optional<StorageMeta> storageMeta = storage.load();
         return storageMeta.orElseGet(CredStorageConfig::initNewStorage);
     }
 

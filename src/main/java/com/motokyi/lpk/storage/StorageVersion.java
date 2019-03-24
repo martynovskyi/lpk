@@ -1,4 +1,4 @@
-package com.motokyi.lpk.creds;
+package com.motokyi.lpk.storage;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

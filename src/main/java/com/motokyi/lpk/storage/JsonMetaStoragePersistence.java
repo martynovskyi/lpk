@@ -2,7 +2,6 @@ package com.motokyi.lpk.storage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.motokyi.lpk.config.LpkProperties;
-import com.motokyi.lpk.creds.CredentialsStoragePersistence;
 import com.motokyi.lpk.model.meta.StorageMeta;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +15,12 @@ import java.util.Optional;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JsonCredStorage implements CredentialsStoragePersistence {
+public class JsonMetaStoragePersistence implements StoragePersistence<StorageMeta> {
     private final ObjectMapper mapper;
     private final LpkProperties props;
 
     @Override
-    public Optional<StorageMeta> loadMeta() {
+    public Optional<StorageMeta> load() {
         if (Files.exists(props.getStorageMeta())) {
             try {
                 final StorageMeta meta = mapper.readerFor(StorageMeta.class)

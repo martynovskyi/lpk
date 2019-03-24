@@ -3,7 +3,7 @@ package com.motokyi.lpk.model.meta;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.motokyi.lpk.creds.StorageVersion;
+import com.motokyi.lpk.storage.StorageVersion;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
