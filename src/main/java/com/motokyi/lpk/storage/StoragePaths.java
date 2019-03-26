@@ -7,5 +7,7 @@ import java.nio.file.Path;
 public interface StoragePaths {
     Path storageRoot();
 
+    Path latestCredsStorage();
+
     Path getStorage(StorageSnapshotMeta item);
 }

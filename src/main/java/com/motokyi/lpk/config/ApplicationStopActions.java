@@ -1,5 +1,6 @@
 package com.motokyi.lpk.config;
 
+import com.motokyi.lpk.model.CredentialStorage;
 import com.motokyi.lpk.model.meta.StorageMeta;
 import com.motokyi.lpk.storage.StoragePersistence;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +14,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ApplicationStopActions implements ApplicationListener<ContextClosedEvent> {
     private final StorageMeta meta;
-    private final StoragePersistence<StorageMeta> persistence;
+    private final CredentialStorage creds;
+    private final StoragePersistence<CredentialStorage> credsPersistence;
+    private final StoragePersistence<StorageMeta> metaPersistence;
 
     @Override
     public void onApplicationEvent(ContextClosedEvent contextClosedEvent) {
-
-        persistence.save(meta);
+        //todo motokyi 2019-03-24: handle issues
+        credsPersistence.save(creds);
+        metaPersistence.save(meta);
     }
 }

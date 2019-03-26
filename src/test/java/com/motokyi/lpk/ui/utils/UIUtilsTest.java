@@ -23,9 +23,10 @@ class UIUtilsTest {
         final JPanel node = new JPanel();
         comp.add(node);
         final Optional<TestPanel> parent = UIUtils.findParent(node, TestPanel.class);
-
-        assertTrue(parent.isPresent());
-        assertEquals(target, parent.get());
+        assertAll(() -> {
+            assertTrue(parent.isPresent());
+            assertEquals(target, parent.get());
+        });
     }
 
     @Test
@@ -48,8 +49,10 @@ class UIUtilsTest {
                 ((JLabel) e).setText(text);
             }
         });
-        assertEquals(text, label1.getText());
-        assertEquals(text, label2.getText());
+        assertAll(() -> {
+            assertEquals(text, label1.getText());
+            assertEquals(text, label2.getText());
+        });
     }
 
     @Test
@@ -58,9 +61,11 @@ class UIUtilsTest {
         final int edgeLength = 10;
         final ImageIcon result = UIUtils.scaleImageIcon(icon, edgeLength, edgeLength);
 
-        assertNotNull(result);
-        assertEquals(edgeLength, result.getIconHeight());
-        assertEquals(edgeLength, result.getIconHeight());
+        assertAll(() -> {
+            assertNotNull(result);
+            assertEquals(edgeLength, result.getIconHeight());
+            assertEquals(edgeLength, result.getIconHeight());
+        });
     }
 
     @Test
@@ -69,10 +74,12 @@ class UIUtilsTest {
         final int edgeLength = 16;
         final Image result = UIUtils.scaleImage(icon.getImage(), edgeLength, edgeLength);
 
-        assertNotNull(result);
-        final ImageIcon scaledicon = new ImageIcon(result);
-        assertEquals(edgeLength, scaledicon.getIconHeight());
-        assertEquals(edgeLength, scaledicon.getIconWidth());
+        assertAll(() -> {
+            assertNotNull(result);
+            final ImageIcon scaledIcon = new ImageIcon(result);
+            assertEquals(edgeLength, scaledIcon.getIconHeight());
+            assertEquals(edgeLength, scaledIcon.getIconWidth());
+        });
     }
 
     @Test
@@ -80,10 +87,11 @@ class UIUtilsTest {
         final ImageIcon icon = new ImageIcon(UIUtilsTest.class.getResource("/icons/test-icon.png"));
         final int edgeLength = 16;
         final Image result = icon.getImage().getScaledInstance(edgeLength, edgeLength, 0);
-
-        assertNotNull(result);
-        final ImageIcon scaledicon = new ImageIcon(result);
-        assertEquals(edgeLength, scaledicon.getIconHeight());
-        assertEquals(edgeLength, scaledicon.getIconWidth());
+        assertAll(() -> {
+            assertNotNull(result);
+            final ImageIcon scaledicon = new ImageIcon(result);
+            assertEquals(edgeLength, scaledicon.getIconHeight());
+            assertEquals(edgeLength, scaledicon.getIconWidth());
+        });
     }
 }
