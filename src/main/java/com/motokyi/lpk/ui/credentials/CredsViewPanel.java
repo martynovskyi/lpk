@@ -6,8 +6,15 @@ import com.motokyi.lpk.ui.gridbad.GridBadBuilder.RowRule;
 import com.motokyi.lpk.ui.utils.GBCFactory;
 import com.motokyi.lpk.ui.utils.JLabelFactory;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 import static com.motokyi.lpk.ui.utils.JButtonFactory.copyToClipboardButton;
 import static com.motokyi.lpk.ui.utils.JTextFieldFactory.disabledTextField;
@@ -31,7 +38,7 @@ class CredsViewPanel extends JPanel {
         final GridBadBuilder gbBuilder = new GridBadBuilder(new CredsViewPanelRowRules());
 
         final JLabel webPageLabel = new JLabel("Web page");
-        final JTextField siteTextField = disabledTextField(webPageLabel.getText(), model.getURL());
+        final JTextField siteTextField = disabledTextField(webPageLabel.getText(), model.getUrl());
         siteTextField.setPreferredSize(PREFERRED_SIZE);
         gbBuilder.addRow(webPageLabel,
                 siteTextField,
@@ -40,7 +47,7 @@ class CredsViewPanel extends JPanel {
                 JLabelFactory.of(model.getCreated()));
 
         final JLabel usernameLabel = new JLabel("Username");
-        final JTextField userNameTF = disabledTextField(usernameLabel.getText(), model.getUsername());
+        final JTextField userNameTF = disabledTextField(usernameLabel.getText(), model.getLogin());
         gbBuilder.addRow(usernameLabel,
                 userNameTF,
                 copyToClipboardButton(userNameTF),

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
+import static java.util.Objects.nonNull;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class DefaultCredsService implements CredService {
 
     @Override
     public void add(CredentialsEntry cred) {
-
+        log.info(cred.toString());
     }
 
     @Override
@@ -36,6 +38,12 @@ public class DefaultCredsService implements CredService {
 
     @Override
     public boolean isValid(CredentialsEntry cred) {
-        return false;
+        return nonNull(cred)
+                && nonNull(cred.getId())
+                && CredsValidator.isValid(CredsType.URL, cred.getUrl())
+                && CredsValidator.isValid(CredsType.NAME, cred.getName())
+                && CredsValidator.isValid(CredsType.LOGIN, cred.getLogin())
+                && CredsValidator.isValid(CredsType.PASSWORD, cred.getPassword())
+                && nonNull(cred.getCreated());
     }
 }

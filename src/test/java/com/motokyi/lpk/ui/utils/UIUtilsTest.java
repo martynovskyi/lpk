@@ -2,11 +2,20 @@ package com.motokyi.lpk.ui.utils;
 
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Image;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.motokyi.lpk.Utils.Colors.INVALID_TEXT_FIELD;
+import static com.motokyi.lpk.Utils.Colors.TEXT_FIELD_BACKGROUND;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UIUtilsTest {
 
@@ -53,6 +62,22 @@ class UIUtilsTest {
             assertEquals(text, label1.getText());
             assertEquals(text, label2.getText());
         });
+    }
+
+    @Test
+    public static void highlightValid() {
+        final JTextField textField = new JTextField();
+        UIUtils.highlight(true, textField);
+
+        assertEquals(TEXT_FIELD_BACKGROUND, textField.getBackground());
+    }
+
+    @Test
+    public static void highlightInvalid() {
+        final JTextField textField = new JTextField();
+        UIUtils.highlight(false, textField);
+
+        assertEquals(INVALID_TEXT_FIELD, textField.getBackground());
     }
 
     @Test

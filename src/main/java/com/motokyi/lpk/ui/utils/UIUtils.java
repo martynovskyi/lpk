@@ -1,11 +1,22 @@
 package com.motokyi.lpk.ui.utils;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentListener;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import static com.motokyi.lpk.Utils.Colors.INVALID_TEXT_FIELD;
+import static com.motokyi.lpk.Utils.Colors.TEXT_FIELD_BACKGROUND;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
@@ -25,12 +36,16 @@ public class UIUtils {
         Container container = component;
         while (nonNull(container.getParent())) {
             container = container.getParent();
-            if (type.equals(container.getClass())) {
+            if (type.isInstance(container)) {
                 return Optional.of(type.cast(container));
             }
 
         }
         return Optional.empty();
+    }
+
+    public static Optional<JFrame> findParentFrame(JComponent component) {
+        return findParent(component, JFrame.class);
     }
 
     public static void walk(JComponent component, Consumer<? super JComponent> consumer) {
@@ -39,6 +54,18 @@ public class UIUtils {
             for (Component c : component.getComponents()) {
                 walk((JComponent) c, consumer);
             }
+        }
+    }
+
+    public static void highlight(boolean state, JComponent component) {
+        if (component instanceof JTextField) {
+            component.setBackground(state ? TEXT_FIELD_BACKGROUND : INVALID_TEXT_FIELD);
+        }
+    }
+
+    public static void addDocumentListener(DocumentListener listener, JTextField... components) {
+        for (JTextField component : components) {
+            component.getDocument().addDocumentListener(listener);
         }
     }
 
