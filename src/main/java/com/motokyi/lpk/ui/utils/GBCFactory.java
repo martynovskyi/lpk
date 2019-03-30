@@ -1,6 +1,7 @@
 package com.motokyi.lpk.ui.utils;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class GBCFactory {
     private static final GridBagConstraints DEFAULTS = new GridBagConstraints();

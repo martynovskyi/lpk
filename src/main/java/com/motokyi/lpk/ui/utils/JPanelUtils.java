@@ -1,6 +1,8 @@
 package com.motokyi.lpk.ui.utils;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 public class JPanelUtils {
     private JPanelUtils() {

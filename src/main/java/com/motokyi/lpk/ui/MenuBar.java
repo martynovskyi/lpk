@@ -1,6 +1,7 @@
 package com.motokyi.lpk.ui;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 
 class MenuBar extends JMenuBar {
 

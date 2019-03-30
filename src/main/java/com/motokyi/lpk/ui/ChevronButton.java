@@ -1,7 +1,7 @@
 package com.motokyi.lpk.ui;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import java.awt.Insets;
 
 import static com.motokyi.lpk.ui.utils.Icons.LESS_CHEVRON;
 import static com.motokyi.lpk.ui.utils.Icons.MORE_CHEVRON;
@@ -28,7 +28,7 @@ class ChevronButton extends JButton {
                     titlePanel.getMainPanel().getContentPanel().setExpanded(true);
                 }
 
-                    super.repaint();
+                super.repaint();
             }
         });
 

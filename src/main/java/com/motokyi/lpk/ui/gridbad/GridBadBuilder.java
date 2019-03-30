@@ -1,7 +1,9 @@
 package com.motokyi.lpk.ui.gridbad;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import static java.util.Objects.nonNull;
 

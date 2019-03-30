@@ -3,8 +3,10 @@ package com.motokyi.lpk.ui.credentials;
 import com.motokyi.lpk.model.CredentialsEntry;
 import com.motokyi.lpk.ui.TitlePanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Component;
 
 import static java.util.Objects.nonNull;
 

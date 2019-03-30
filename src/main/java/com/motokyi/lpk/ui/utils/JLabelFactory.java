@@ -1,6 +1,6 @@
 package com.motokyi.lpk.ui.utils;
 
-import javax.swing.*;
+import javax.swing.JLabel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

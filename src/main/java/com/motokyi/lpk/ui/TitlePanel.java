@@ -2,8 +2,11 @@ package com.motokyi.lpk.ui;
 
 import com.motokyi.lpk.ui.credentials.CredsItemPanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
 public class TitlePanel extends JPanel {
 

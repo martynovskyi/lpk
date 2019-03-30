@@ -3,8 +3,10 @@ package com.motokyi.lpk.ui.credentials;
 
 import com.motokyi.lpk.model.CredentialsEntry;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
 public class CredsContentPanel extends JPanel {
 

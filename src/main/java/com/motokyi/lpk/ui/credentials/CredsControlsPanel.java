@@ -2,7 +2,10 @@ package com.motokyi.lpk.ui.credentials;
 
 import com.motokyi.lpk.ui.utils.Icons;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 class CredsControlsPanel extends JPanel {
     private final CredsContentPanel rootPanel;

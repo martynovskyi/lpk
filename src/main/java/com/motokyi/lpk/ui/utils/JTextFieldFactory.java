@@ -1,6 +1,6 @@
 package com.motokyi.lpk.ui.utils;
 
-import javax.swing.*;
+import javax.swing.JTextField;
 
 public class JTextFieldFactory {
 
