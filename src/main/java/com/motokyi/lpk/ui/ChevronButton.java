@@ -27,7 +27,6 @@ class ChevronButton extends JButton {
                     super.setIcon(LESS_CHEVRON);
                     titlePanel.getMainPanel().getContentPanel().setExpanded(true);
                 }
-
                 super.repaint();
             }
         });

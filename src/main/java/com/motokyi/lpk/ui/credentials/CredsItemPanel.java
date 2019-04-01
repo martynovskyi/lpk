@@ -7,14 +7,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Component;
-
-import static java.util.Objects.nonNull;
+import java.util.Random;
 
 public class CredsItemPanel extends JPanel {
+    private static final int ALPHA = 40;
+    private static final Random RANDOM = new Random();
     private final TitlePanel titlePanel;
     private final CredsContentPanel contentPanel;
     private final CredentialsEntry model;
-
 
     public CredsItemPanel(CredentialsEntry creds) {
         super();
@@ -22,27 +22,16 @@ public class CredsItemPanel extends JPanel {
         super.setAlignmentY(Component.TOP_ALIGNMENT);
         this.model = creds;
         this.titlePanel = new TitlePanel(model.getName());
+        final Color color = new Color(
+                RANDOM.nextInt(256),
+                RANDOM.nextInt(256),
+                RANDOM.nextInt(256),
+                ALPHA);
+        this.titlePanel.setBackground(color);
+        this.titlePanel.setForeground(color);
         this.contentPanel = new CredsContentPanel(model);
         super.add(titlePanel);
         super.add(contentPanel);
-    }
-
-
-    @Override
-    public void setBackground(Color bg) {
-        if (nonNull(titlePanel) && nonNull(contentPanel)) {
-            this.titlePanel.setBackground(bg);
-        }
-    }
-
-    public void expandCollapse() {
-        final boolean newState = !contentPanel.isVisible();
-        contentPanel.setExpanded(newState);
-    }
-
-
-    public TitlePanel getTitlePanel() {
-        return titlePanel;
     }
 
     public CredsContentPanel getContentPanel() {
@@ -51,6 +40,9 @@ public class CredsItemPanel extends JPanel {
 
     @Override
     public Component add(Component comp) {
-        return super.add(comp);
+        if (comp instanceof CredsItemPanel) {
+            return super.add(comp);
+        }
+        return comp;
     }
 }

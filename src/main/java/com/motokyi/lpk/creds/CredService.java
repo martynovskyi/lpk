@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CredService {
-    void add(CredentialsEntry cred);
+    boolean add(CredentialsEntry cred);
 
     List<CredentialsEntry> find(String keyword);
 
-    void update(CredentialsEntry cred);
+    boolean update(CredentialsEntry cred);
 
-    void remove(UUID id);
+    boolean remove(UUID id);
 
     boolean isValid(CredentialsEntry cred);
 

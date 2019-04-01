@@ -1,6 +1,8 @@
 package com.motokyi.lpk.creds;
 
+import com.motokyi.lpk.model.CredentialStorage;
 import com.motokyi.lpk.model.CredentialsEntry;
+import com.motokyi.lpk.storage.StoragePersistence;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,14 @@ import static java.util.Objects.nonNull;
 @Service
 @RequiredArgsConstructor
 public class DefaultCredsService implements CredService {
-
+    private final CredentialStorage storage;
+    private final StoragePersistence<CredentialStorage> persistence;
 
     @Override
-    public void add(CredentialsEntry cred) {
-        log.info(cred.toString());
+    public boolean add(CredentialsEntry cred) {
+        storage.add(cred);
+        persistence.save(storage);
+        return true;
     }
 
     @Override
@@ -27,13 +32,13 @@ public class DefaultCredsService implements CredService {
     }
 
     @Override
-    public void update(CredentialsEntry cred) {
-
+    public boolean update(CredentialsEntry cred) {
+        return false;
     }
 
     @Override
-    public void remove(UUID id) {
-
+    public boolean remove(UUID id) {
+        return false;
     }
 
     @Override

@@ -39,7 +39,6 @@ public class UIUtils {
             if (type.isInstance(container)) {
                 return Optional.of(type.cast(container));
             }
-
         }
         return Optional.empty();
     }
