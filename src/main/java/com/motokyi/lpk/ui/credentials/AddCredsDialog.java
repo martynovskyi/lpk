@@ -18,9 +18,12 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import static com.motokyi.lpk.ui.utils.UIUtils.addDocumentListener;
 import static com.motokyi.lpk.ui.utils.UIUtils.highlight;
+import static java.util.Objects.nonNull;
 
 
 public class AddCredsDialog extends JDialog {
@@ -59,6 +62,7 @@ public class AddCredsDialog extends JDialog {
         save.addActionListener(new AddCredsDialogActionListener());
         addDocumentListener(new AddCredsDialogDocumentListener(), urlTF, nameTF, loginTF, passwordTF);
 
+        nameTF.addFocusListener(new CredNameSuggester());
         super.setContentPane(gbBuilder.build());
         super.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         super.setSize(800, 400);
@@ -88,6 +92,7 @@ public class AddCredsDialog extends JDialog {
         @Override
         public void insertUpdate(DocumentEvent e) {
             performValidation();
+
         }
 
         @Override
@@ -117,6 +122,31 @@ public class AddCredsDialog extends JDialog {
             if (performValidation() && credService.isValid(creds)) {
                 credService.add(creds);
             }
+        }
+    }
+
+    private class CredNameSuggester implements FocusListener {
+
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (nonNull(nameTF.getText())
+                    && nonNull(urlTF.getText())
+                    && nameTF.getText().isBlank()
+                    && CredsValidator.isValid(CredsType.URL, urlTF.getText())
+                    && !urlTF.getText().isBlank()) {
+                final String text = urlTF.getText();
+                final int start = 1 + text.indexOf("/", text.indexOf("/") + 1);
+                int end = text.indexOf("/", start);
+                if (end < start) {
+                    end = text.length();
+                }
+                nameTF.setText(text.substring(start, end));
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+
         }
     }
 }

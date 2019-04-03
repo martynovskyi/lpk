@@ -73,13 +73,13 @@ public class UIUtils {
     }
 
     public static Image scaleImage(Image src, int w, int h) {
-        BufferedImage resized = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = resized.createGraphics();
+        BufferedImage resize = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resize.createGraphics();
 
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2.drawImage(src, 0, 0, w, h, null);
         g2.dispose();
 
-        return resized;
+        return resize;
     }
 }
