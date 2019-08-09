@@ -39,7 +39,7 @@ public class JsonMetaStoragePersistence implements StoragePersistence<StorageMet
     }
 
     @Override
-    public void save(final StorageMeta meta) {
+    public boolean save(final StorageMeta meta) {
         try {
             final LocalDateTime closed = meta.closed();
             log.info("Storage closed at: " + closed);
@@ -49,6 +49,8 @@ public class JsonMetaStoragePersistence implements StoragePersistence<StorageMet
         } catch (IOException e) {
             //todo motokyi 2019-03-12: handle exception
             log.error("Storage meta-data saving error", e);
+            return false;
         }
+        return true;
     }
 }

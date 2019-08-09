@@ -90,4 +90,18 @@ public class GBCFactory {
         gbc.fill = GridBagConstraints.BOTH;
         return gbc;
     }
+
+    public static GridBagConstraints gbcCenter(Insets insets, int gridWight, int weightx) {
+        return new GridBagConstraints(DEFAULTS.gridx,
+                DEFAULTS.gridy,
+                gridWight,
+                DEFAULTS.gridheight,
+                weightx,
+                DEFAULTS.weighty,
+                GridBagConstraints.CENTER,
+                DEFAULTS.fill,
+                insets,
+                DEFAULTS.ipadx,
+                DEFAULTS.ipady);
+    }
 }

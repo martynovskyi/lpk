@@ -19,7 +19,10 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -53,7 +56,6 @@ class JsonCredStoragePersistenceTest extends FSTest {
             assertNotNull(result);
             assertTrue(result.isPresent());
         });
-
     }
 
     @Test

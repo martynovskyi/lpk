@@ -37,33 +37,36 @@ public class JsonCredStoragePersistence implements StoragePersistence<Credential
     }
 
     @Override
-    public void save(CredentialStorage creds) {
+    public boolean save(CredentialStorage creds) {
         final Path storage = storagePaths.latestCredsStorage().resolve(CRD_LPK);
         log.info("Saving CredentialStorage to FS path: {}", storage);
-        load().ifPresentOrElse(c -> {
-                    if (hasDiff(c, creds)) {
-                        try {
-                            mapper.writerWithDefaultPrettyPrinter()
-                                    .writeValue(storage.toFile(), creds);
-                        } catch (Exception e) {
-                            //todo motokyi 2019-03-24:
-                        }
-                        log.info("Credentials changed. Storage overwritten.");
-                    } else {
-                        log.info("Credentials not changed. No actions.");
-                    }
-                },
-                () -> {
-                    try {
-                        mapper.writerWithDefaultPrettyPrinter()
-                                .writeValue(storage.toFile(), creds);
-                    } catch (Exception e) {
-                        //todo motokyi 2019-03-24:
-                    }
-                    log.info("CredentialStorage not found. Saved new.");
-                });
+        final Optional<CredentialStorage> storageFromFile = load();
 
-
+        if (storageFromFile.isPresent()) {
+            if (hasDiff(storageFromFile.get(), creds)) {
+                try {
+                    mapper.writerWithDefaultPrettyPrinter()
+                            .writeValue(storage.toFile(), creds);
+                } catch (Exception e) {
+                    log.error("Exception during writing storage", e);
+                    return false;
+                }
+                log.info("Credentials changed. Storage overwritten.");
+            } else {
+                log.info("Credentials not changed. No actions.");
+            }
+            return true;
+        } else {
+            try {
+                mapper.writerWithDefaultPrettyPrinter()
+                        .writeValue(storage.toFile(), creds);
+            } catch (Exception e) {
+                log.error("Exception during writing new storage", e);
+                return false;
+            }
+            log.info("CredentialStorage not found. Saved new.");
+            return true;
+        }
     }
 
     private boolean hasDiff(CredentialStorage c, CredentialStorage creds) {

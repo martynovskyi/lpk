@@ -17,16 +17,23 @@ public class GridBadBuilder {
         this.rule = rule;
     }
 
-    public GridBadBuilder(JPanel panel, RowRule rule) {
-        panel.setLayout(new GridBagLayout());
-        this.panel = panel;
-        this.rule = rule;
-    }
-
     public void addRow(JComponent... components) {
         if (nonNull(components) && components.length > 0) {
             for (int col = 0; col < components.length; col++) {
-                panel.add(components[col], rule.handle(col, row));
+                final GridBagConstraints constraints = rule.handle(col, row);
+                panel.add(components[col], constraints);
+            }
+            row++;
+        }
+    }
+
+    public void addRow(GBCell... cells) {
+        if (nonNull(cells) && cells.length > 0) {
+            for (int col = 0; col < cells.length; col++) {
+                final GBCell cell = cells[col];
+                if (GBCell.EMPTY != cell) {
+                    panel.add(cell.getComponent(), cell.getConstraints(col, row));
+                }
             }
             row++;
         }

@@ -18,15 +18,16 @@ public class CredsItemPanel extends JPanel {
 
     public CredsItemPanel(CredentialsEntry creds) {
         super();
+        this.model = creds;
         super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         super.setAlignmentY(Component.TOP_ALIGNMENT);
-        this.model = creds;
-        this.titlePanel = new TitlePanel(model.getName());
+        super.setName(creds.getId().toString());
         final Color color = new Color(
                 RANDOM.nextInt(256),
                 RANDOM.nextInt(256),
                 RANDOM.nextInt(256),
                 ALPHA);
+        this.titlePanel = new TitlePanel(model.getName());
         this.titlePanel.setBackground(color);
         this.titlePanel.setForeground(color);
         this.contentPanel = new CredsContentPanel(model);

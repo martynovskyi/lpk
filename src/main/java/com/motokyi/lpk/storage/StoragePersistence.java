@@ -6,5 +6,5 @@ public interface StoragePersistence<T> {
 
     Optional<T> load();
 
-    void save(final T entity);
+    boolean save(final T entity);
 }

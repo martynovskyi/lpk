@@ -1,11 +1,13 @@
 package com.motokyi.lpk.creds;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.apache.commons.validator.routines.UrlValidator;
 
 import static java.util.Objects.isNull;
 
 public class CredsValidator {
+    private static final String[] SCHEMES = {"http", "https"};
+    private static final UrlValidator URL_VALIDATOR = new UrlValidator(SCHEMES);
+
     public static boolean isValid(CredsType type, String value) {
         if (isNull(value)) {
             return false;
@@ -13,12 +15,7 @@ public class CredsValidator {
         switch (type) {
             case URL: {
                 if (!value.isBlank()) {
-                    try {
-                        new URL(value);
-                        return true;
-                    } catch (MalformedURLException e) {
-                        return false;
-                    }
+                    return URL_VALIDATOR.isValid(value);
                 }
                 return false;
             }

@@ -21,9 +21,7 @@ public class DefaultCredsService implements CredService {
 
     @Override
     public boolean add(CredentialsEntry cred) {
-        storage.add(cred);
-        persistence.save(storage);
-        return true;
+        return storage.add(cred) && persistence.save(storage);
     }
 
     @Override

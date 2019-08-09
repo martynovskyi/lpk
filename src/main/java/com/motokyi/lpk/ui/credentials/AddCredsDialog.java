@@ -4,8 +4,10 @@ import com.motokyi.lpk.creds.CredService;
 import com.motokyi.lpk.creds.CredsType;
 import com.motokyi.lpk.creds.CredsValidator;
 import com.motokyi.lpk.model.CredentialsEntry;
+import com.motokyi.lpk.ui.gridbad.GBCell;
 import com.motokyi.lpk.ui.gridbad.GridBadBuilder;
 import com.motokyi.lpk.ui.utils.GBCFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -26,12 +28,14 @@ import static com.motokyi.lpk.ui.utils.UIUtils.highlight;
 import static java.util.Objects.nonNull;
 
 
+@Slf4j
 public class AddCredsDialog extends JDialog {
     private final JTextField urlTF = new JTextField();
     private final JTextField nameTF = new JTextField();
     private final JTextField loginTF = new JTextField();
     private final JTextField passwordTF = new JTextField();
     private final JTextField commentTF = new JTextField();
+    private final JLabel message = new JLabel("ℹ Fill form ");
     private final CredService credService;
 
     public AddCredsDialog(CredService credService, JFrame frame) {
@@ -50,6 +54,8 @@ public class AddCredsDialog extends JDialog {
                 }
             }
         });
+
+        gbBuilder.addRow(GBCell.of(message, GBCFactory.gbcCenter(new Insets(10, 10, 10, 10), 2, 2)));
 
         urlTF.setPreferredSize(new Dimension(600, 24));
         gbBuilder.addRow(new JLabel("Web page"), urlTF);
@@ -84,7 +90,20 @@ public class AddCredsDialog extends JDialog {
         final boolean validPassword = CredsValidator.isValid(CredsType.PASSWORD, passwordTF.getText());
         highlight(validPassword, passwordTF);
 
-        return validName && validUrl && validLogin && validPassword;
+        final boolean result = validName && validUrl && validLogin && validPassword;
+        message.setVisible(!result);
+        if (result) {
+            message.setText("🆗");
+        } else {
+            message.setText("⚠ Invalid fields");
+        }
+        return result;
+    }
+
+    @Override
+    public void dispose() {
+        log.debug("Closing AddCredsDialog");
+        super.dispose();
     }
 
     private class AddCredsDialogDocumentListener implements DocumentListener {
@@ -111,7 +130,6 @@ public class AddCredsDialog extends JDialog {
         @Override
         public void actionPerformed(ActionEvent a) {
 
-
             final var creds = CredentialsEntry.builder()
                     .name(nameTF.getText().trim())
                     .url(urlTF.getText().trim())
@@ -120,7 +138,11 @@ public class AddCredsDialog extends JDialog {
                     .comment(commentTF.getText().trim())
                     .build();
             if (performValidation() && credService.isValid(creds)) {
-                credService.add(creds);
+                if (credService.add(creds)) {
+                    AddCredsDialog.this.dispose();
+                } else {
+                    message.setText("Error during creating new credential entry. Please, restart application.");
+                }
             }
         }
     }

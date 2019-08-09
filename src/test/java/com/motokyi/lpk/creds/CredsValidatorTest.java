@@ -14,15 +14,15 @@ class CredsValidatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {" ", "   ", "\t", "\n", "1234567", "text"})
+    @ValueSource(strings = {" ", "   ", "\t", "\n", "1234567", "text", "http:/web.com", "https:/web.com"})
     void isValidUrlFalse(String value) {
-        assertFalse(CredsValidator.isValid(CredsType.PASSWORD, value));
+        assertFalse(CredsValidator.isValid(CredsType.URL, value));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"http://web.com", "https://web.com"})
     void isValidUrl(String value) {
-        assertTrue(CredsValidator.isValid(CredsType.PASSWORD, value));
+        assertTrue(CredsValidator.isValid(CredsType.URL, value));
     }
 
     @ParameterizedTest

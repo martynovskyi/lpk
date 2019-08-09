@@ -1,2 +1,7 @@
 #lpk:
 #  home: user/home/.lpk
+
+logging:
+  level:
+    root: info
+    com.motokyi: debug
